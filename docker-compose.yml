@@ -1,0 +1,14 @@
+version: "3"
+services:
+  okta_awscli:
+    container_name: okta_awscli
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args: 
+        OKTA_BASE_URL: domain.okta.com
+        OKTA_USER: user@domain.com
+        OKTA_PASS: HelloPass
+        OKTA_APP_LINK: https://domain.okta.com/home/.../aA-zZ/0-9
+        OKTA_ROLE: arn:aws:iam::0-9:role/Hello
+    command: "okta-awscli"
