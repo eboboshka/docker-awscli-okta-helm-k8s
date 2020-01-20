@@ -1,9 +1,10 @@
 FROM python:alpine
 LABEL maintainer="Artem Trutko <trutko.artem@gmail.com>"
+LABEL repository="https://github.com/eboboshka/docker-awscli-okta-helm-k8s"
 
 ARG AWSCLI_VERSION="1.17.5"
-ARG HELM_VERSION="2.16.1"
-ARG K8S_VERSION="1.17.1"
+ARG HELM_VERSION="2.15.2"
+ARG K8S_VERSION="1.14.10"
 ARG OKTA_AWS_VERSION="0.4.0"
 
 WORKDIR /root/
