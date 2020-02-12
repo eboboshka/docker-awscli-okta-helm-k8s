@@ -2,18 +2,21 @@ FROM python:alpine
 LABEL maintainer="Artem Trutko <trutko.artem@gmail.com>"
 LABEL repository="https://github.com/eboboshka/docker-awscli-okta-helm-k8s"
 
-ARG AWSCLI_VERSION="1.17.5"
-ARG HELM_VERSION="2.15.2"
+ARG AWSCLI_VERSION="1.17.15"
+ARG HELM_VERSION="2.16.1"
 ARG K8S_VERSION="1.14.10"
 ARG OKTA_AWS_VERSION="0.4.0"
 
 WORKDIR /root/
 
 COPY ./okta-aws.template ./
-ADD https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz /tmp/
+## https://github.com/helm/helm/tags
+ADD https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz /tmp/
+## https://github.com/kubernetes/kubernetes/releases
+## https://storage.googleapis.com/kubernetes-release/release/stable.txt
 ADD https://storage.googleapis.com/kubernetes-release/release/v${K8S_VERSION}/bin/linux/amd64/kubectl /usr/local/bin
 
-RUN apk add -U --no-cache ca-certificates gettext && \
+RUN apk add -U --no-cache ca-certificates gettext git && \
   pip3 install --no-cache-dir --upgrade pip && \
   pip3 --no-cache-dir install awscli==${AWSCLI_VERSION} okta-awscli==${OKTA_AWS_VERSION} && \
   tar -xf /tmp/helm-v${HELM_VERSION}-linux-amd64.tar.gz && \
