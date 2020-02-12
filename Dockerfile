@@ -16,7 +16,7 @@ ADD https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz /tmp/
 ## https://storage.googleapis.com/kubernetes-release/release/stable.txt
 ADD https://storage.googleapis.com/kubernetes-release/release/v${K8S_VERSION}/bin/linux/amd64/kubectl /usr/local/bin
 
-RUN apk add -U --no-cache ca-certificates gettext git && \
+RUN apk add -U --no-cache ca-certificates gettext git bash && \
   pip3 install --no-cache-dir --upgrade pip && \
   pip3 --no-cache-dir install awscli==${AWSCLI_VERSION} okta-awscli==${OKTA_AWS_VERSION} && \
   tar -xf /tmp/helm-v${HELM_VERSION}-linux-amd64.tar.gz && \
